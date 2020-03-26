@@ -1,3 +1,5 @@
 require 'pry'
 require 'httparty'
 require_relative '../lib/cli_job_search/api'
+require_relative '../lib/cli_job_search/cli'
+require_relative '../lib/cli_job_search/job'
