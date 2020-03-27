@@ -2,9 +2,11 @@
 
 class CLI
 
- def start
+ def self.start
   puts "Hello, happy to help you job search."
-  puts "Please enter your zipcode"
-  zipcode = gets
+        sleep(2)
+  puts "Please enter your zipcode:"
+  zipcode = gets.chomp
+  zipcode
  end
 end
