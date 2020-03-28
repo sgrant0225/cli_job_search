@@ -11,7 +11,8 @@ class API
      hash['location'],
      hash['title'],
      hash['company'],
-     hash['url'])
+     hash['url'],
+     hash['description'])
     end
   end
 end
