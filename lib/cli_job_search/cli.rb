@@ -5,6 +5,7 @@ class CLI
  def open
   self.start
   self.menu
+  #self.reset_terminal
   #self.job_listings
   #self.display_job
  end
@@ -29,18 +30,19 @@ class CLI
      if options.include?(input)
        selection(input)
      else
-       reset_terminal
-       puts "Invalid selection"
+       puts "Invalid selection!"
        menu
+       sleep(3)
     end
  end
 
  def selection(input)
    case input
     when 1
-      reset_terminal
+      #reset_terminal
       print "Please enter a location:"
-      search = gets.chomp.to_s
+      search_location = gets.chomp.to_s
+    end
  end
 
 
@@ -55,11 +57,10 @@ class CLI
   end
 
 def jobs_not_found
-   self.reset
    puts "Unable to locate any jobs in your area at this time"
  end
 
  def reset_terminal
-   reset
+   self.reset
  end
 end

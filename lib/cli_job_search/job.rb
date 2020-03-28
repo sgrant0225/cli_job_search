@@ -2,7 +2,7 @@ class JOB
  attr_accessor :location, :title, :company, :job_url, :description
 
   @@all = []
-  @@jobs_located_from_search = []
+  @@jobs_located_by_search = []
 
  def initialize(location, title, company, job_url, description)
      @location = location
@@ -17,14 +17,14 @@ class JOB
    @@all
  end
 
- def self.search_by_location(job_location)
-     @@jobs_found_by_search = @@all.select do |job|
-       job.location.include?(search_term)
+ def self.search_location(locations)
+     @@jobs_located_by_search = @@all.select do |jobs|
+       jobs.location.include?(locations)
      end
    end
 
    def self.jobs_found_by_search
-     @@jobs_located_from_search
+     @@jobs_located_by_search
    end
 
 end
