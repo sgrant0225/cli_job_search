@@ -22,7 +22,7 @@ class JOB
  def self.find_by_name(name)
    self.all.select do |city|
      #binding.pry
-    city.location.downcase == name
+    city.location.capitalize == name
    end
  end
 
