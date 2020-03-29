@@ -1,25 +1,25 @@
 class CLI
 
  def open
-  self.start
+  self.welcome
    #API.get_data
   self.menu
   self.display_jobs
+  self.jobs_not_found
   #self.reset_terminal
   #self.job_listings
-  #self.display_job
  end
 
- def start
+ def welcome
   puts "Hello, happy to help you search for Ruby on Rails developer positions."
     sleep(2)
-
+  end
   # else
   #    reset_terminal
   #   puts "Type Exit to quit"
   # zipcode = gets.chomp
   # zipcode
- end
+
 
  def menu
    puts "1. Continue"
@@ -28,26 +28,26 @@ class CLI
      input = gets.chomp.to_i
      options = [1, 2]
      if options.include?(input)
-       selection(input)
+       users_selection(input)
      else
        puts "Invalid selection!"
        menu
-       sleep(3)
     end
  end
 
- def selection(input)
+ def users_selection(input)
    case input
+   when 2
+     close
     when 1
       #reset_terminal
       print "Please enter a location:"
+      #Line below will take in users location
       locations = gets.chomp.to_s.downcase
        jobs_found = JOB.search_location(locations)
-       if JOB.jobs_found?
-         display_jobs
-       else
-         jobs_not_found
-
+       #binding.pry
+         JOB.jobs_found? ? display_jobs : jobs_not_found
+         menu
     end
  end
 
@@ -58,10 +58,8 @@ class CLI
 #
  def display_jobs
    JOB.all.each do |jobs|
-     binding.pry
-    jobs.each do |job| #with_index(1) do |job, index|
-      #binding.pry
-     puts "#{index}. #{job.title} located in #{job.location}"
+     #binding.pry
+
     end
    end
 
@@ -73,6 +71,9 @@ def jobs_not_found
 #  def reset_terminal
 #    self.reset
 #  end
-    end
+  def close
+   puts "Have a great day, goodbye"
+   exit
   end
+
 end

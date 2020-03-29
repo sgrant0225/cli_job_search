@@ -18,7 +18,12 @@ class JOB
    @@all
  end
 
+ def create
+
+ end
+
  def self.search_location(locations)
+      clear_search
     @@jobs_located_by_search = @@all.select do |jobs|
       jobs.location.include?(locations)
     end
@@ -27,6 +32,10 @@ class JOB
   def self.jobs_found_by_search
      @@jobs_located_by_search
   end
+
+  def self.clear_search
+      @@jobs_located_by_search.clear
+    end
 
   def self.jobs_found?
     if @@jobs_located_by_search != []
