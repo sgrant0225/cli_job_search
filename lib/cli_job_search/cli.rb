@@ -1,9 +1,9 @@
-
-
 class CLI
 
  def open
   self.start
+   API.get_data
+
   self.menu
   #self.reset_terminal
   #self.job_listings
@@ -12,7 +12,7 @@ class CLI
 
  def start
   puts "Hello, happy to help you search for Ruby on Rails developer positions."
-    sleep(2)
+    #sleep(2)
 
   # else
   #    reset_terminal
@@ -41,26 +41,35 @@ class CLI
     when 1
       #reset_terminal
       print "Please enter a location:"
-      search_location = gets.chomp.to_s
+      locations = gets.chomp.to_s
+       jobs_found = JOB.search_location(locations)
+       if jobs_found
+         display_jobs
+
     end
  end
 
 
- def job_listings
-  API.get_data
- end
-
- def display_job
+#  def job_listings
+#   API.get_data
+#  end
+#
+ def display_jobs
    JOB.all.each do |jobs|
-   #binding.pry
+    jobs.each.with_index(1) do |job, index|
+     #binding.pry
+     puts "#{index}. #{job.title} located in #{job.location}"
+    end
    end
-  end
+
 
 def jobs_not_found
    puts "Unable to locate any jobs in your area at this time"
  end
 
- def reset_terminal
-   self.reset
- end
+#  def reset_terminal
+#    self.reset
+#  end
+    end
+  end
 end
