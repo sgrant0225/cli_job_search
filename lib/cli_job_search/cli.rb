@@ -2,12 +2,9 @@ class CLI
 
  def open
   self.welcome
-   #API.get_data
+  #API.get_data
   self.menu
-  self.display_jobs
-  self.jobs_not_found
-  #self.reset_terminal
-  #self.job_listings
+  # self.display_jobs
  end
 
  def welcome
@@ -43,7 +40,7 @@ class CLI
       #reset_terminal
       print "Please enter a location:"
       #Line below will take in users location
-      locations = gets.chomp.to_s.downcase
+      locations = gets.chomp.to_s.capitalize
        jobs_found = JOB.search_location(locations)
        #binding.pry
          JOB.jobs_found? ? display_jobs : jobs_not_found
@@ -58,10 +55,11 @@ class CLI
 #
  def display_jobs
    JOB.all.each do |jobs|
-     #binding.pry
-
+    puts jobs.title
     end
    end
+
+
 
 
 def jobs_not_found
