@@ -3,10 +3,6 @@ class CLI
  def open
    #API.get_data
   self.menu
-  # self.display_jobs
-  # self.jobs_not_found
-  #self.reset_terminal
-  #self.job_listings
  end
 
  def welcome
@@ -29,24 +25,32 @@ class CLI
        menu
     end
  end
+
  def display_jobs
    JOB.all.each_with_index do |job, index|
-    puts "#{index + 1}. #{job.location}"
-  end
+    puts "#{index + 1}. #{job.title} - #{job.location}"
+    puts""
+    end
  end
 
  def job_selection(location)
   j = JOB.jobs_found_by_search(location)
   if j == []
     puts "No jobs found!"
+    puts ""
     puts "Here's a list of jobs and locations."
     display_jobs
+    menu
   else
   j.each do |j|
     puts "Title: #{j.title}"
     puts "Company: #{j.company}"
     puts "Location: #{j.location}"
     puts "URL: #{j.url}"
+    puts "------------------Description------------------------------"
+    puts ""
+    tags = j.description
+    puts tags.sanitize
    end
   end
  end
