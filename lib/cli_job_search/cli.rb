@@ -14,11 +14,7 @@ class CLI
     sleep(2)
     API.get_data
   end
-  # else
-  #    reset_terminal
-  #   puts "Type Exit to quit"
-  # zipcode = gets.chomp
-  # zipcode
+
  def menu
   welcome
    puts "1. Continue"
@@ -33,19 +29,25 @@ class CLI
        menu
     end
  end
- # def display_jobs
- #   JOB.all.each_with_index do |job, index|
- #    puts "#{index + 1}. #{job.title}"
- #  end
- # end
+ def display_jobs
+   JOB.all.each_with_index do |job, index|
+    puts "#{index + 1}. #{job.location}"
+  end
+ end
 
  def job_selection(location)
   j = JOB.jobs_found_by_search(location)
+  if j == []
+    puts "No jobs found!"
+    puts "Here's a list of jobs and locations."
+    display_jobs
+  else
   j.each do |j|
     puts "Title: #{j.title}"
     puts "Company: #{j.company}"
     puts "Location: #{j.location}"
-    puts ""
+    puts "URL: #{j.url}"
+   end
   end
  end
 
@@ -54,35 +56,14 @@ class CLI
    when 2
      close
     when 1
-      #reset_terminal
-      #display_jobs
-      puts "Please enter a location: "
-      #Line below will take in users location
+      puts "Please enter a location: city, state"
+      #Line below will take in users input's location
       locations = gets.chomp.to_s.capitalize
       job_selection(locations)
-       # jobs_found = JOB.search_location(locations)
-       # #binding.pry
-       #   JOB.jobs_found? ? display_jobs : jobs_not_found
-       #   menu
     end
-    # users_selection(input)
- end
-#  def job_listings
-#   API.get_data
-#  end
-#
- # def display_jobs
- #   JOB.all.each do |jobs|
- #     #binding.pry
- #    end
- #   end
-def jobs_not_found
-   puts "Unable to locate any jobs in your area at this time"
- end
-#  def reset_terminal
-#    self.reset
-#  end
-  def close
+  end
+
+def close
    puts "Have a great day, goodbye"
    exit
   end

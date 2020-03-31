@@ -18,7 +18,7 @@ class API
      # hash['url'],
      # hash['description'])
      #binding.pry
-  puts stored_objects.class
+  #puts stored_objects.class
   stored_objects.each {|hash| JOB.new(hash).id}
   end
 end
