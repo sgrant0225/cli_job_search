@@ -43,14 +43,17 @@ class CLI
     menu
   else
   j.each do |j|
+    puts ""
+    puts "------------------Details---------------------------------"
     puts "Title: #{j.title}"
     puts "Company: #{j.company}"
     puts "Location: #{j.location}"
     puts "URL: #{j.url}"
     puts "------------------Description------------------------------"
     puts ""
-    tags = j.description
-    puts tags.sanitize
+    re =  /<("[^"]*"|'[^']*'|[^'">])*>/
+    puts j.description.gsub!(re, '')
+
    end
   end
  end
